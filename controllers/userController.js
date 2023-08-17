@@ -89,10 +89,45 @@ const deleteUser = asyncHandler(async (req,res) => {
 )
 
 
+
+
+
+/** 
+* @desc get users count
+* @route /api/users/profile-photo-upload
+* @method post
+* @access private (only logger user)
+*/
+const profilePhotoUpload = asyncHandler(async (req,res) => {
+  res.status(200).json({message :"your photo uploaded successfully"});
+}
+)
+
+
+
+/** 
+* @desc get users count
+* @route /api/users/count
+* @method get
+* @access private (onlyadmin)
+*/
+const getUsersCount = asyncHandler(async (req,res) => {
+  const count = await User.count();
+  res.status(200).json(count);
+
+}
+)
+
+
+
+
+
 module.exports = {
   updateUser,
   getAllUser,
   getUser,
-  deleteUser
+  deleteUser,
+  profilePhotoUpload,
+  getUsersCount
 
 } 

@@ -15,6 +15,7 @@ connectToDB()
 
 //routes
 app.use("/api/auth" , require('./routes/auth'))
+app.use("/api/users" , require('./routes/users'))
 
 
  // Error Hanlder Middleware
