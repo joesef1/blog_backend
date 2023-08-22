@@ -2,6 +2,9 @@ const {validateRegisterUser, validateLoginUser, validateUpdateUser, User} = requ
 const asyncHandler = require("express-async-handler");
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const path = require("path");
+const { cloudinaryUploadImage,cloudinaryRemoveImage } = require("../utils/cloudinary");
+const { log } = require("console");
 
 
 /*
@@ -93,15 +96,47 @@ const deleteUser = asyncHandler(async (req,res) => {
 
 
 /** 
-* @desc get users count
+* @desc profile photo upload
 * @route /api/users/profile-photo-upload
 * @method post
 * @access private (only logger user)
 */
 const profilePhotoUpload = asyncHandler(async (req,res) => {
+
+  if (!req.file) {
+    return res.status(400).json({message :"no file provided"})
+  }
+
+
+  // 2- get the path of img
+  const imagePath = path.join(__dirname, `../images/${req.file.filename}`);
+const result =await cloudinaryUploadImage(imagePath)
+console.log(result);
+  // 3- upload to cloudinary
+
   res.status(200).json({message :"your photo uploaded successfully"});
 }
 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

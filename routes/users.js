@@ -6,6 +6,7 @@ const {verifyTokenAndAuthorization,verifyTokenAndAdmin, verifyToken} = require("
 const {
    updateUser, getAllUser,getUser,deleteUser,getUsersCount, profilePhotoUpload } = require('../controllers/userController');
 const validateObjectId = require('../middlewares/validateObjectId');
+const PhotoUpload = require('../middlewares/photoUpload');
 
 
 router.put("/:id",validateObjectId,verifyTokenAndAuthorization, updateUser);
@@ -14,7 +15,7 @@ router.get("/", verifyTokenAndAdmin, getAllUser);
 // router.get("/:id",validateObjectId,verifyTokenAndAuthorization, getUser);
 router.get("/count", getUsersCount);
 router.delete("/:id",verifyTokenAndAuthorization,deleteUser);
-router.post("/profile-photo-upload", verifyToken,profilePhotoUpload);
+router.post("/profile-photo-upload", verifyToken,PhotoUpload.single("image"),profilePhotoUpload);
 
 
 
