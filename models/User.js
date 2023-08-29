@@ -1,51 +1,52 @@
 const mongoose = require("mongoose");
 const Joi = require('joi');
 
+// User Schema
 const UserSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 5,
-    maxlength: 100,
-    unique: true,
-  },
   userName: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 2,
-    maxlength: 200,
-  },
-  password: {
-    type: String,
-    required: true,
-    trim: true,
-    minlength: 6,
-  },
-  isAdmin: {
-    type: Boolean, // Corrected type definition
-    default: false, // Note: Set the default value as a boolean
-  },
-  profilePhoto:{
-    type: Object,
-    default:{
-      url:"https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
-      publicId: null,
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 2,
+        maxlength: 100,
+    },
+    email: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 5,
+        maxlength: 100,
+        unique: true,
+    },
+    password: {
+        type: String,
+        required: true,
+        trim: true,
+        minlength: 8,
+    },
+    profilePhoto: {
+        type: Object,
+        default: {
+            url: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
+            publicId: null,
+        }
     },
     bio: {
-      type: String, 
-  },
-  isAccuntverified: {
-    type: Boolean, 
-    default: false,
-},
-}}, {
-  timestamps: true
+        type: String,
+    },
+    isAdmin: {
+        type:Boolean,
+        default: false,
+    },
+    isAccountVerified: {
+        type:Boolean,
+        default: false,
+    },
+}, {
+    timestamps: true,
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 });
-
-// ... rest of the code remains unchanged ...
-
 
 
 const User = mongoose.model("User", UserSchema);

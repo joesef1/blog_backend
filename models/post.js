@@ -33,7 +33,7 @@ const PostSchema = new mongoose.Schema(
         publicId: null,
       },
     },
-    likes: [
+     likes: [
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
@@ -48,11 +48,11 @@ const PostSchema = new mongoose.Schema(
 );
 
 //Populate Comment For This Post
-PostSchema.virtual("comments", {
-  ref: "Comment",
-  foreignField: "postId",
-  localField: "_id"
-});
+// PostSchema.virtual("comments", {
+//   ref: "Comment",
+//   foreignField: "postId",
+//   localField: "_id"
+// });
 
 // Post Model
 const Post = mongoose.model("Post", PostSchema);
